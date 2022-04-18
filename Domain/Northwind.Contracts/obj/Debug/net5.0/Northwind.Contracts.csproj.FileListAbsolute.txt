@@ -10,3 +10,6 @@ D:\WEB API\NorthwindWebApi\Domain\Northwind.Contracts\obj\Debug\net5.0\Northwind
 D:\WEB API\NorthwindWebApi\Domain\Northwind.Contracts\obj\Debug\net5.0\refint\Northwind.Contracts.dll
 D:\WEB API\NorthwindWebApi\Domain\Northwind.Contracts\obj\Debug\net5.0\Northwind.Contracts.pdb
 D:\WEB API\NorthwindWebApi\Domain\Northwind.Contracts\obj\Debug\net5.0\ref\Northwind.Contracts.dll
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Contracts\bin\Debug\net5.0\Northwind.Entities.dll
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Contracts\bin\Debug\net5.0\Northwind.Entities.pdb
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Contracts\obj\Debug\net5.0\Northwind.Contracts.csproj.CopyComplete

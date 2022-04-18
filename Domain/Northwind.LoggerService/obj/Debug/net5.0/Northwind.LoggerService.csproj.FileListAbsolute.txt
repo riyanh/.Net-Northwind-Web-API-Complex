@@ -13,3 +13,5 @@ D:\WEB API\NorthwindWebApi\Domain\Northwind.LoggerService\obj\Debug\net5.0\North
 D:\WEB API\NorthwindWebApi\Domain\Northwind.LoggerService\obj\Debug\net5.0\refint\Northwind.LoggerService.dll
 D:\WEB API\NorthwindWebApi\Domain\Northwind.LoggerService\obj\Debug\net5.0\Northwind.LoggerService.pdb
 D:\WEB API\NorthwindWebApi\Domain\Northwind.LoggerService\obj\Debug\net5.0\ref\Northwind.LoggerService.dll
+D:\WEB API\NorthwindWebApi\Domain\Northwind.LoggerService\bin\Debug\net5.0\Northwind.Entities.dll
+D:\WEB API\NorthwindWebApi\Domain\Northwind.LoggerService\bin\Debug\net5.0\Northwind.Entities.pdb

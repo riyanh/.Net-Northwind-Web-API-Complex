@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Northwind.Entities\Northwind.Entities.csproj" />
     <ProjectReference Include="..\..\Domain\Northwind.LoggerService\Northwind.LoggerService.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Northwind.Repository\Northwind.Repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1620,6 +1620,9 @@
       "Northwind.Contracts/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Northwind.Entities": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Northwind.Contracts.dll": {}
         },
@@ -1653,6 +1656,20 @@
         },
         "runtime": {
           "bin/placeholder/Northwind.LoggerService.dll": {}
+        }
+      },
+      "Northwind.Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Northwind.Contracts": "1.0.0",
+          "Northwind.Entities": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Northwind.Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Northwind.Repository.dll": {}
         }
       }
     }
@@ -6103,6 +6120,11 @@
       "type": "project",
       "path": "../../Domain/Northwind.LoggerService/Northwind.LoggerService.csproj",
       "msbuildProject": "../../Domain/Northwind.LoggerService/Northwind.LoggerService.csproj"
+    },
+    "Northwind.Repository/1.0.0": {
+      "type": "project",
+      "path": "../../Infrastructure/Northwind.Repository/Northwind.Repository.csproj",
+      "msbuildProject": "../../Infrastructure/Northwind.Repository/Northwind.Repository.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -6112,6 +6134,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.16",
       "Northwind.Entities >= 1.0.0",
       "Northwind.LoggerService >= 1.0.0",
+      "Northwind.Repository >= 1.0.0",
       "Swashbuckle.AspNetCore >= 5.6.3"
     ]
   },
@@ -6147,6 +6170,9 @@
             },
             "D:\\WEB API\\NorthwindWebApi\\Domain\\Northwind.LoggerService\\Northwind.LoggerService.csproj": {
               "projectPath": "D:\\WEB API\\NorthwindWebApi\\Domain\\Northwind.LoggerService\\Northwind.LoggerService.csproj"
+            },
+            "D:\\WEB API\\NorthwindWebApi\\Infrastructure\\Northwind.Repository\\Northwind.Repository.csproj": {
+              "projectPath": "D:\\WEB API\\NorthwindWebApi\\Infrastructure\\Northwind.Repository\\Northwind.Repository.csproj"
             }
           }
         }
