@@ -1,0 +1,15 @@
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\bin\Debug\net5.0\Northwind.Entities.deps.json
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\bin\Debug\net5.0\Northwind.Entities.runtimeconfig.json
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\bin\Debug\net5.0\Northwind.Entities.runtimeconfig.dev.json
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\bin\Debug\net5.0\Northwind.Entities.dll
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\bin\Debug\net5.0\Northwind.Entities.pdb
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\obj\Debug\net5.0\Northwind.Entities.csproj.AssemblyReference.cache
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\obj\Debug\net5.0\Northwind.Entities.GeneratedMSBuildEditorConfig.editorconfig
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\obj\Debug\net5.0\Northwind.Entities.AssemblyInfoInputs.cache
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\obj\Debug\net5.0\Northwind.Entities.AssemblyInfo.cs
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\obj\Debug\net5.0\Northwind.Entities.csproj.CoreCompileInputs.cache
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\obj\Debug\net5.0\Northwind.Entities.dll
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\obj\Debug\net5.0\refint\Northwind.Entities.dll
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\obj\Debug\net5.0\Northwind.Entities.pdb
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\obj\Debug\net5.0\Northwind.Entities.genruntimeconfig.cache
+D:\WEB API\NorthwindWebApi\Domain\Northwind.Entities\obj\Debug\net5.0\ref\Northwind.Entities.dll
