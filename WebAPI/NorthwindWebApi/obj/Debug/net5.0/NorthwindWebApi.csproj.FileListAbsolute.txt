@@ -70,3 +70,9 @@ D:\WEB API\NorthwindWebApi\WebApi\NorthwindWebApi\bin\Debug\net5.0\Northwind.Ent
 D:\WEB API\NorthwindWebApi\WebApi\NorthwindWebApi\bin\Debug\net5.0\Northwind.Entities.pdb
 D:\WEB API\NorthwindWebApi\WebApi\NorthwindWebApi\bin\Debug\net5.0\Northwind.Repository.dll
 D:\WEB API\NorthwindWebApi\WebApi\NorthwindWebApi\bin\Debug\net5.0\Northwind.Repository.pdb
+D:\WEB API\NorthwindWebApi\WebApi\NorthwindWebApi\bin\Debug\net5.0\AutoMapper.dll
+D:\WEB API\NorthwindWebApi\WebApi\NorthwindWebApi\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\WEB API\NorthwindWebApi\WebApi\NorthwindWebApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\WEB API\NorthwindWebApi\WebApi\NorthwindWebApi\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
+D:\WEB API\NorthwindWebApi\WebApi\NorthwindWebApi\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+D:\WEB API\NorthwindWebApi\WebApi\NorthwindWebApi\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll

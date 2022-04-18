@@ -10,6 +10,7 @@ namespace Northwind.Contracts
     public interface IRepositoryManager
     {
         ICategoryRepository Category { get; }
+
         ICustomersRepository Customers { get; }
 
         void Save();
