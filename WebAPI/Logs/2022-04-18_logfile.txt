@@ -10,3 +10,8 @@
 2022-04-18 12:25:09.8217 DEBUG Debug message
 2022-04-18 12:25:09.8217 WARN Warn Message
 2022-04-18 12:25:09.8217 ERROR error Message
+2022-04-18 20:16:55.2766 INFO Category with Id : 21 doesn't exist
+2022-04-18 21:21:03.8812 INFO Category with Id : 12312 not found
+2022-04-18 21:23:28.1477 INFO Category with Id : 10 not found
+2022-04-18 21:24:20.6451 INFO Category with Id : 10 not found
+2022-04-18 21:38:58.9565 INFO Category with id : 10 not found

@@ -6,6 +6,7 @@ using System.Linq;
 using Northwind.Entities.DataTransferObject;
 using AutoMapper;
 using System.Collections.Generic;
+using Northwind.Entities.Models;
 
 namespace NorthwindWebApi.Controllers
 {
@@ -48,7 +49,78 @@ namespace NorthwindWebApi.Controllers
                 _logger.LogError($"{nameof(GetCategories)} message : {ex}");
                 return StatusCode(500, "Internal Server Error");
             }
+        }//EndMethodGetCategories
+
+        [HttpGet("{id}",Name = "CategoryById")]
+        public IActionResult GetCategory(int id)
+        {
+            var category = _repository.Category.GetCategory(id, trackChanges: false);
+            if(category == null)
+            {
+                _logger.LogInfo($"Category with Id : {id} doesn't exist");
+                return NotFound();
+            }
+            else
+            {
+                var categoryDto = _mapper.Map<CategoryDto>(category);
+                return Ok(categoryDto);
+            }
+        }//endClass GetCategory parameter id
+
+        [HttpPost]
+        public IActionResult CreateCategory([FromBody] CategoryDto categoryDto)
+        {
+            if (categoryDto == null)
+            {
+                _logger.LogError("Category object is null");
+                return BadRequest("Category object is null");
+            }
+
+            var categoryEntity = _mapper.Map<Category>(categoryDto);
+            _repository.Category.CreateCategory(categoryEntity);
+            _repository.Save();
+
+            var categoryResult = _mapper.Map<CategoryDto>(categoryEntity);
+            return CreatedAtRoute("CategoryById", new { id = categoryResult.categoryId }, categoryResult);
+        }//endClass CreateCategory
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCategory(int id)
+        {
+            var category = _repository.Category.GetCategory(id, trackChanges: false);
+            if(category == null)
+            {
+                _logger.LogInfo($"Category with Id : {id} not found");
+                return NotFound();
+            }
+
+            _repository.Category.DeleteCategory(category);
+            _repository.Save();
+
+            return NoContent();
         }
 
+        [HttpPut("{id}")]
+        public IActionResult UpdateCategory(int id, [FromBody] CategoryDto categoryDto)
+        {
+            if(categoryDto == null)
+            {
+                _logger.LogError($"Category Must not be null");
+                return BadRequest("Category must not be null");
+            }
+
+            //find category by id
+            var categoryEntity = _repository.Category.GetCategory(id, trackChanges: true);
+            if(categoryEntity == null)
+            {
+                _logger.LogInfo($"Category with id : {id} not found");
+                return NotFound();
+            }
+
+            _mapper.Map(categoryDto, categoryEntity);
+            _repository.Category.UpdateCategory(categoryEntity);
+            _repository.Save();
+            return NoContent();
+        }
     }
 }

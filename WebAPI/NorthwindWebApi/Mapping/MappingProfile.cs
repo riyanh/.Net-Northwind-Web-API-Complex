@@ -8,7 +8,12 @@ namespace NorthwindWebApi.Mapping
     {
         public MappingProfile()
         {
+            //get category
             CreateMap<Category, CategoryDto>();
+            CreateMap<Customer, CustomerDto>();
+            //post category
+            CreateMap<CategoryDto, Category>();
+            CreateMap<CustomerDto, Customer>();
         }
     }
 }

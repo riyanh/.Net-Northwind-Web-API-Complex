@@ -32,7 +32,17 @@ namespace Northwind.Repository
                 }
         }
 
-        public ICustomersRepository Customers => throw new NotImplementedException();
+        public ICustomersRepository Customers
+        {
+            get
+            {
+                if(_customersRepository == null)
+                {
+                    _customersRepository = new CustomersRepository(_repositoryContext);
+                }
+                return _customersRepository;
+            }
+        }
 
         public void Save()
         {

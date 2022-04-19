@@ -17,12 +17,12 @@ namespace Northwind.Repository.Models
 
         public void CreateCategory(Category category)
         {
-            CreateCategory(category);
+            Create(category);
         }
 
         public void DeleteCategory(Category category)
         {
-            DeleteCategory(category);
+            Delete(category);
         }
 
         public IEnumerable<Category> GetAllCategory(bool trackChanges) =>
@@ -32,11 +32,10 @@ namespace Northwind.Repository.Models
 
         public Category GetCategory(int id, bool trackChanges) =>
             FindByCondition(c => c.CategoryId.Equals(id), trackChanges).SingleOrDefault();
-        
 
         public void UpdateCategory(Category category)
         {
-            UpdateCategory(category);
+            Update(category);
         }
     }
 }
