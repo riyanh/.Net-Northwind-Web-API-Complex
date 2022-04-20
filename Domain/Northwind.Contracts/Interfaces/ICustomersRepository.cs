@@ -11,7 +11,7 @@ namespace Northwind.Contracts.Interfaces
     {
         IEnumerable<Customer> GetAllCustomer(bool trackChanges);
 
-        Customer GetCustomer(string id, bool trackChanges);
+        Customer GetCustomer(string CustId, bool trackChanges);
         void CreateCustomer(Customer customer);
         void UpdateCustomer(Customer customer);
         void DeleteCustomer(Customer customer);

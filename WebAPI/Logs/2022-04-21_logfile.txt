@@ -1,0 +1,7 @@
+2022-04-21 06:03:53.1262 ERROR AddToCart message : AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+OrderDetail -> OrdersDetailDto
+Northwind.Entities.Models.OrderDetail -> Northwind.Entities.DataTransferObject.OrdersDetailDto
+   at lambda_method211(Closure , Object , OrdersDetailDto , ResolutionContext )
+   at NorthwindWebApi.Controllers.CartShoppingController.AddToCart(CartDto cartDto) in D:\WEB API\NorthwindWebApi\WebApi\NorthwindWebApi\Controllers\CartShoppingController.cs:line 65

@@ -34,3 +34,9 @@ Northwind.Entities.Models.Customer -> Northwind.Entities.DataTransferObject.Cust
 2022-04-19 09:55:11.9010 INFO Customer with Id : COK doesn't exist
 2022-04-19 09:56:17.3380 INFO Customer with Id : ODDI doesn't exist
 2022-04-19 09:56:19.6376 INFO Customer with Id : ODDI doesn't exist
+2022-04-19 12:22:47.3622 INFO Customer with id : {CustId} not found
+2022-04-19 12:22:56.2849 INFO Customer with id : {CustId} not found
+2022-04-19 12:23:04.3443 INFO Customer with id : {CustId} not found
+2022-04-19 12:24:07.7797 INFO Customer with id : {CustId} not found
+2022-04-19 12:25:55.4172 INFO Customer with id : {CustId} not found
+2022-04-19 12:26:43.0811 INFO Customer with id : {CustId} not found

@@ -15,6 +15,9 @@ namespace Northwind.Repository
         private RepositoryContext _repositoryContext;
         private ICategoryRepository _categoryRepository;
         private ICustomersRepository _customersRepository;
+        private IOrderRepository _orderRepository;
+        private IProductRepository _productRepository;
+        private IOrderDetailsRepository _orderDetailsRepository;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {
@@ -41,6 +44,42 @@ namespace Northwind.Repository
                     _customersRepository = new CustomersRepository(_repositoryContext);
                 }
                 return _customersRepository;
+            }
+        }
+
+        public IOrderDetailsRepository OrderDetails
+        {
+            get
+            {
+                if(_orderDetailsRepository == null)
+                {
+                    _orderDetailsRepository = new OrderDetailsRepository(_repositoryContext);
+                }
+                return _orderDetailsRepository;
+            }
+        }
+
+        public IOrderRepository Order
+        {
+            get
+            {
+                if (_orderRepository == null)
+                {
+                    _orderRepository = new OrderRepository(_repositoryContext);
+                }
+                return _orderRepository;
+            }
+        }
+
+        public IProductRepository Product
+        {
+            get
+            {
+                if (_productRepository == null)
+                {
+                    _productRepository = new ProductRepository(_repositoryContext);
+                }
+                return _productRepository;
             }
         }
 

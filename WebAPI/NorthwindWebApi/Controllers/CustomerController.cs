@@ -48,13 +48,13 @@ namespace NorthwindWebApi.Controllers
             }
         }
 
-        [HttpGet("{id}", Name = "CustomerById")]
-        public IActionResult GetCustomer(string id)
+        [HttpGet("{CustId}", Name = "CustomerById")]
+        public IActionResult GetCustomer(string CustId)
         {
-            var customer = _repository.Customers.GetCustomer(id, trackChanges: false);
+            var customer = _repository.Customers.GetCustomer(CustId, trackChanges: false);
             if(customer == null)
             {
-                _logger.LogInfo($"Customer with Id : {id} doesn't exist");
+                _logger.LogInfo($"Customer with Id : {CustId} doesn't exist");
                 return NotFound();
             }
             else
@@ -78,16 +78,16 @@ namespace NorthwindWebApi.Controllers
             _repository.Save();
 
             var customerResult = _mapper.Map<CustomerDto>(customerEntity);
-            return CreatedAtRoute("CustomerById", new { id = customerResult.CustomerID }, customerResult);
+            return CreatedAtRoute("CustomerById", new { CustId = customerResult.CustomerID }, customerResult);
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult DeleteCustomer(string id)
+        [HttpDelete("{CustId}")]
+        public IActionResult DeleteCustomer(string custId)
         {
-            var customer = _repository.Customers.GetCustomer(id, trackChanges: false);
+            var customer = _repository.Customers.GetCustomer(custId, trackChanges: false);
             if(customer == null)
             {
-                _logger.LogInfo($"Customer With Id : {id} not found");
+                _logger.LogInfo($"Customer With Id : {custId} not found");
                 return NotFound();
             }
 
@@ -96,8 +96,8 @@ namespace NorthwindWebApi.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id}")]
-        public IActionResult UpdateCustomer(string id, [FromBody] CustomerDto customerDto)
+        [HttpPut("{CustId}")]
+        public IActionResult UpdateCustomer(string custId, [FromBody] CustomerDto customerDto)
         {
             if(customerDto == null)
             {
@@ -105,10 +105,10 @@ namespace NorthwindWebApi.Controllers
                 return BadRequest("Customer Must not be null");
             }
 
-            var customerEntity = _repository.Customers.GetCustomer(id, trackChanges: true);
+            var customerEntity = _repository.Customers.GetCustomer(custId, trackChanges: true);
             if(customerEntity == null)
             {
-                _logger.LogInfo($"Customer with id : {id} not found");
+                _logger.LogInfo($"Customer with id : {custId} not found");
                 return NotFound();
             }
 

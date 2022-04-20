@@ -31,8 +31,8 @@ namespace Northwind.Repository.Models
             .ToList();
         
 
-        public Customer GetCustomer(string id, bool trackChanges) =>
-          FindByCondition(c => c.CustomerId.Equals(id), trackChanges).SingleOrDefault();
+        public Customer GetCustomer(string CustId, bool trackChanges) =>
+          FindByCondition(c => c.CustomerId.Equals(CustId), trackChanges).SingleOrDefault();
 
         public void UpdateCustomer(Customer customer)
         {

@@ -1,0 +1,14 @@
+2022-04-20 23:02:26.5656 ERROR AddToCart message : AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Tuple`3 -> CartDto
+System.Tuple`3[[System.Int32, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[Northwind.Entities.Models.OrderDetail, Northwind.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.String, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]] -> Northwind.Entities.DataTransferObject.CartDto
+   at lambda_method127(Closure , Object , CartDto , ResolutionContext )
+   at NorthwindWebApi.Controllers.CartShoppingController.AddToCart(CartDto cartDto) in D:\WEB API\NorthwindWebApi\WebApi\NorthwindWebApi\Controllers\CartShoppingController.cs:line 65
+2022-04-20 23:04:34.6300 ERROR AddToCart message : AutoMapper.AutoMapperMappingException: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+Tuple`3 -> CartDto
+System.Tuple`3[[System.Int32, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[Northwind.Entities.Models.OrderDetail, Northwind.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.String, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]] -> Northwind.Entities.DataTransferObject.CartDto
+   at lambda_method122(Closure , Object , CartDto , ResolutionContext )
+   at NorthwindWebApi.Controllers.CartShoppingController.AddToCart(CartDto cartDto) in D:\WEB API\NorthwindWebApi\WebApi\NorthwindWebApi\Controllers\CartShoppingController.cs:line 65

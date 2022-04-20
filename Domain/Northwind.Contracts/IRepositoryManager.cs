@@ -13,6 +13,10 @@ namespace Northwind.Contracts
 
         ICustomersRepository Customers { get; }
 
+        IOrderDetailsRepository OrderDetails { get; }
+        IOrderRepository Order { get; }
+        IProductRepository Product { get; }
+
         void Save();
     }
 }
