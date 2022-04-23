@@ -4,17 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Northwind.Entities.Models;
+using Northwind.Entities.RequestFeatures;
 
 namespace Northwind.Contracts.Interfaces
 {
     public interface ICustomersRepository
     {
-        IEnumerable<Customer> GetAllCustomer(bool trackChanges);
+        Task <IEnumerable<Customer>> GetAllCustomerAsync(bool trackChanges);
 
-        Customer GetCustomer(string CustId, bool trackChanges);
-        void CreateCustomer(Customer customer);
-        void UpdateCustomer(Customer customer);
-        void DeleteCustomer(Customer customer);
+        Task <Customer> GetCustomerAsync(string custId, bool trackChanges);
+        void CreateCustomerAsync(Customer customer);
+        void UpdateCustomerAsync(Customer customer);
+        void DeleteCustomerAsync(Customer customer);
 
+        Task<IEnumerable<Customer>> GetPaginationCustomerAsync(CustomerParameters customerParameters, bool trackChanges);
+
+        Task<IEnumerable<Customer>> SearchCustomer(CustomerParameters customerParameters, bool trackChanges);
     }
 }

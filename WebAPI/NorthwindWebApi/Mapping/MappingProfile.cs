@@ -15,9 +15,12 @@ namespace NorthwindWebApi.Mapping
             CreateMap<OrderDetail, OrdersDetailDto>();
             //post category
             CreateMap<CategoryDto, Category>();
-            CreateMap<CustomerDto, Customer>();
+            CreateMap<CategoryUpdateDto, Category>().ReverseMap();
+            CreateMap<CustomerDto, Customer>().ReverseMap();
+            CreateMap<CustomerUpdateDto, Customer>().ReverseMap();
             CreateMap<CartDto, OrderDetail>().ReverseMap();
             CreateMap<OrdersDetailDto, OrderDetail>();
+            CreateMap<OrderDto, Order>().ReverseMap();
         }
     }
 }

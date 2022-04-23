@@ -7,6 +7,9 @@ using Northwind.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch;
+using Northwind.Entities.RequestFeatures;
 
 namespace NorthwindWebApi.Controllers
 {
@@ -26,35 +29,20 @@ namespace NorthwindWebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCustomers()
+        public async Task<IActionResult> GetAllCustomerAsync()
         {
-            try
-            {
-                var customers = _repository.Customers.GetAllCustomer(trackChanges: false);
-                /*var customerDto = customers.Select(c => new CustomerDto
-                {
-                    CustomerID = c.CustomerId,
-                    CompanyName = c.CompanyName,
-                    ContactName = c.ContactName
-
-                }).ToList();*/
-                //var customerDto = _mapper.Map<IEnumerable<CustomerDto>>(customers);
-                return Ok(customers);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"{nameof(GetCustomers)} message : {ex}");
-                return StatusCode(500, "Internal Server Error");
-            }
+            var customer = await _repository.Customers.GetAllCustomerAsync(trackChanges: false);
+            var customerDto = _mapper.Map<IEnumerable<CustomerDto>>(customer);
+            return Ok(customerDto);
         }
 
-        [HttpGet("{CustId}", Name = "CustomerById")]
-        public IActionResult GetCustomer(string CustId)
+        [HttpGet("{custId}", Name = "CustomerById")]
+        public async Task<IActionResult> GetCustomer(string custId)
         {
-            var customer = _repository.Customers.GetCustomer(CustId, trackChanges: false);
+            var customer = await _repository.Customers.GetCustomerAsync(custId, false);
             if(customer == null)
             {
-                _logger.LogInfo($"Customer with Id : {CustId} doesn't exist");
+                _logger.LogInfo($"Customer with id : {custId} not found");
                 return NotFound();
             }
             else
@@ -65,57 +53,124 @@ namespace NorthwindWebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCustomer([FromBody] CustomerDto customerDto)
+        public async Task<IActionResult> PostCustomer([FromBody] CustomerDto customerDto)
         {
             if(customerDto == null)
             {
-                _logger.LogError("Customer object is null");
-                return BadRequest("Customer object is null");
+                _logger.LogError("Customer is null");
+                return BadRequest("Customer is null");
+            }
+
+            //object modelState digunakan untuk validasi data yang ditangkap oleh customerDto
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError("Invalid modelstate customerdto");
+                return UnprocessableEntity(ModelState);
             }
 
             var customerEntity = _mapper.Map<Customer>(customerDto);
-            _repository.Customers.CreateCustomer(customerEntity);
-            _repository.Save();
+            _repository.Customers.CreateCustomerAsync(customerEntity);
+            await _repository.SaveAsync(); 
 
             var customerResult = _mapper.Map<CustomerDto>(customerEntity);
-            return CreatedAtRoute("CustomerById", new { CustId = customerResult.CustomerID }, customerResult);
+            return CreatedAtRoute("CustomerById", new { custId = customerResult.CustomerId }, customerResult);
         }
 
-        [HttpDelete("{CustId}")]
-        public IActionResult DeleteCustomer(string custId)
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCustomer(string id)
         {
-            var customer = _repository.Customers.GetCustomer(custId, trackChanges: false);
-            if(customer == null)
+            var customer = await _repository.Customers.GetCustomerAsync(id, trackChanges: false);
+            if (customer == null)
             {
-                _logger.LogInfo($"Customer With Id : {custId} not found");
+                _logger.LogInfo($"Customer with id : {id} doesn't exist in database");
                 return NotFound();
             }
 
-            _repository.Customers.DeleteCustomer(customer);
-            _repository.Save();
+            _repository.Customers.DeleteCustomerAsync(customer);
+            await _repository.SaveAsync();
             return NoContent();
         }
 
-        [HttpPut("{CustId}")]
-        public IActionResult UpdateCustomer(string custId, [FromBody] CustomerDto customerDto)
+        [HttpPut("{custId}")]
+        public async Task<IActionResult> UpdateCustomer(string custId, [FromBody] CustomerUpdateDto customerDto)
         {
-            if(customerDto == null)
+            if (customerDto == null)
             {
-                _logger.LogError($"Customer Must not be null");
-                return BadRequest("Customer Must not be null");
+                _logger.LogError("Customer must not be null");
+                return BadRequest("Customer must not be null");
             }
 
-            var customerEntity = _repository.Customers.GetCustomer(custId, trackChanges: true);
-            if(customerEntity == null)
+            if (!ModelState.IsValid)
             {
-                _logger.LogInfo($"Customer with id : {custId} not found");
+                _logger.LogError("Invalid model state for customerdto object");
+                return UnprocessableEntity(ModelState);
+            }
+            var customerEntity = await _repository.Customers.GetCustomerAsync(custId, trackChanges: true);
+
+            if (customerEntity == null)
+            {
+                _logger.LogError($"Company with id : {custId} not found");
                 return NotFound();
             }
 
             _mapper.Map(customerDto, customerEntity);
-            _repository.Customers.UpdateCustomer(customerEntity);
-            _repository.Save();
+            //_repository.Customer.UpdateCustomer(customerEntity);
+            await _repository.SaveAsync();
             return NoContent();
         }
-    }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PartialUpdateCustomer(string id, [FromBody]
+                             JsonPatchDocument<CustomerUpdateDto> patchDoc)
+        {
+            if (patchDoc == null)
+            {
+                _logger.LogError($"PatchDoc object sent is null");
+                return BadRequest("PatchDoc object sent is null");
+            }
+
+            var customerEntity = await _repository.Customers.GetCustomerAsync(id, trackChanges: true);
+
+            if (customerEntity == null)
+            {
+                _logger.LogError($"Customer with id : {id} not found");
+                return NotFound();
+            }
+
+            var customerPatch = _mapper.Map<CustomerUpdateDto>(customerEntity);
+
+            patchDoc.ApplyTo(customerPatch);
+
+            TryValidateModel(customerPatch);
+
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError("Invalid model state for pathc document");
+                return UnprocessableEntity();
+            }
+
+            _mapper.Map(customerPatch, customerEntity);
+
+            await _repository.SaveAsync();
+
+            return NoContent();
+        }
+
+        [HttpGet("pagination")]
+        public async Task<IActionResult> GetCustomerPagination([FromQuery]CustomerParameters customerParameters)
+        {
+            var customerPage = await _repository.Customers.GetPaginationCustomerAsync(customerParameters, trackChanges: false);
+            var customerDto = _mapper.Map<IEnumerable<CustomerDto>>(customerPage);
+            return Ok(customerDto);
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> GetCustomerSearch([FromQuery] CustomerParameters customerParameters)
+        {
+            var customerSearch = await _repository.Customers.SearchCustomer(customerParameters, trackChanges: false);
+            var customerDto = _mapper.Map<IEnumerable<CustomerDto>>(customerSearch);
+            return Ok(customerDto);
+        }
+
+    }//endClass
 }

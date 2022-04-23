@@ -18,5 +18,6 @@ namespace Northwind.Contracts
         IProductRepository Product { get; }
 
         void Save();
+        Task SaveAsync();
     }
 }

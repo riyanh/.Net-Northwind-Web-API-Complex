@@ -35,7 +35,7 @@ namespace Northwind.Repository.Models
 
         public void UpdateOrder(Order order)
         {
-           Update(order);
+            Update(order);
         }
     }
 }

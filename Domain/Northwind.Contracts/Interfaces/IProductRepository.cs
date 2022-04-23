@@ -12,6 +12,8 @@ namespace Northwind.Contracts.Interfaces
         IEnumerable<Product> GetAllProduct(bool trackChanges);
 
         Product GetProduct(int ProductId, bool trackChanges);
+
+        void CreateProductUpdate(Product product);
         
     }
 }

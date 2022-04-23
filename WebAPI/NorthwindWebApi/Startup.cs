@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using NorthwindWebApi.Extensions;
 using NLog;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace NorthwindWebApi
 {
@@ -46,7 +47,18 @@ namespace NorthwindWebApi
             //call autoMapper config
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddControllers();
+            services.AddControllers(config =>
+            {
+                //call for validation
+                config.RespectBrowserAcceptHeader = true;
+                config.ReturnHttpNotAcceptable = true;
+
+            }).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.Formatting = Formatting.Indented;
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            })
+               .AddXmlDataContractSerializerFormatters();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NorthwindWebApi", Version = "v1" });

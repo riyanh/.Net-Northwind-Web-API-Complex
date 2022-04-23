@@ -70,6 +70,49 @@ namespace NorthwindWebApi.Controllers
                      return StatusCode(500, $"Error {ex}");
              }
 
+        }
+
+        [HttpPost("CheckOut")]
+        public IActionResult CheckOut(int orderId)
+        {
+            try
+            {
+                var checkOut = _service.CheckOut(orderId);
+                return Ok(_mapper.Map<OrderDto>(checkOut));
             }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{ex}");
+            }
+        }
+
+        /*[HttpPost("CheckOut")]
+        public IActionResult CheckOut(int orderId)
+        {
+            try
+            {
+                var checkOut = _service.CheckOut(orderId);
+                return Ok(_mapper.Map<OrderDto>(checkOut.Item2));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"{ex}");
+            }
+        }*/
+
+        [HttpPost("Shipped")]
+        public IActionResult Shipped(ShippedDto shippedDto, int orderId)
+        {
+            try
+            {
+                var shipResult = _service.Shipped(shippedDto, orderId);
+
+                return Ok(_mapper.Map<OrderDto>(shipResult.Item2));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

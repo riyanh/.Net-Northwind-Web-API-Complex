@@ -15,6 +15,11 @@ namespace Northwind.Repository.Models
         {
         }
 
+        public void CreateProductUpdate(Product product)
+        {
+            Update(product);
+        }
+
         public IEnumerable<Product> GetAllProduct(bool trackChanges) =>
             FindAll(trackChanges)
             .OrderBy(c => c.ProductId)

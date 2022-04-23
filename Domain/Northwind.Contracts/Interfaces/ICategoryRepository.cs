@@ -4,17 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Northwind.Entities.Models;
+using Northwind.Entities.RequestFeatures;
 
 namespace Northwind.Contracts.Interfaces
 {
     public interface ICategoryRepository
     {
-        IEnumerable<Category> GetAllCategory(bool trackChanges);
+        Task <IEnumerable<Category>> GetAllCategoryAsync(bool trackChanges);
 
-        Category GetCategory(int id, bool trackChanges);
+        Task <Category> GetCategoryAsync(int id, bool trackChanges);
 
-        void CreateCategory(Category category);
-        void DeleteCategory(Category category);
-        void UpdateCategory(Category category);
+        void CreateCategoryAsync(Category category);
+        void DeleteCategoryAsync(Category category);
+        void UpdateCategoryAsync(Category category);
+        Task<IEnumerable<Category>> GetPaginationCategoryAsync(CategoryParameters categoryParameters, bool trackChanges);
+
+        Task<IEnumerable<Category>> GetSearchCategoryAsync(CategoryParameters categoryParameters, bool trackChanges);
     }
 }

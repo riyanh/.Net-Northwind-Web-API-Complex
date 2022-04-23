@@ -54,8 +54,8 @@ namespace Northwind.Repository
                 }
                 else
                 {
-                        orderDetail.Quantity += (short)qty;
-                        orderDetail.UnitPrice += (decimal)((decimal)product.UnitPrice * qty);
+                        orderDetail.Quantity = (short)(orderDetail.Quantity + qty);
+                        orderDetail.UnitPrice = (decimal)(orderDetail.UnitPrice + (orderDetail.UnitPrice * qty));
                         _repository.OrderDetails.UpdateOrderDetails(orderDetail);
                         _repository.Save();
                 }
@@ -65,6 +65,69 @@ namespace Northwind.Repository
             {
                 return Tuple.Create(-1, orderDetail, ex.Message);
             }
+        }
+
+      /*  public Tuple<int, Order, string> CheckOut(int orderId)
+        {
+            Order order1 = null;
+            try
+            {
+                var order = _repository.Order.GetOrder(orderId, trackChanges: true);
+                if (order == null)
+                {
+                    return Tuple.Create(-1, order, "Order Not Found");
+                }
+                order = new Order();
+                order.RequiredDate = DateTime.Now;
+                List<OrderDetail> orderDetail = _repository.OrderDetails.GetAllOrderDetails(trackChanges: true).Where(o => o.OrderId == orderId).ToList();
+                foreach (var item in orderDetail)
+                {
+                    var product = _repository.Product.GetProduct(item.ProductId, trackChanges: true);
+                    product.UnitsInStock -= item.Quantity;
+                    _repository.Product.CreateProductUpdate(product);
+                    _repository.Save();
+                    
+                }
+                _repository.Order.UpdateOrder(order);
+                _repository.Save();
+                return Tuple.Create(1, order, "Succes");
+            }
+            catch (Exception ex)
+            {
+                return Tuple.Create(-1, order1, "Success");
+            }
+        }*/
+
+        public Order CheckOut(int orderId)
+        {
+            //Order order = new Order();
+
+            try
+            {
+                var order = _repository.Order.GetOrder(orderId, trackChanges: true);
+                if (order == null)
+                {
+                    return order;
+                }
+                order = new Order();
+                order.RequiredDate = DateTime.Now;
+                List<OrderDetail> orderDetails = _repository.OrderDetails.GetAllOrderDetails(trackChanges: true).Where(o => o.OrderId == orderId).ToList();
+                foreach (var item in orderDetails)
+                {
+                    var product = _repository.Product.GetProduct(item.ProductId, trackChanges: true);
+                    product.UnitsInStock = (short?)(product.UnitsInStock - item.Quantity);
+                    _repository.Product.CreateProductUpdate(product);
+                    _repository.Save();
+                }
+                _repository.Order.UpdateOrder(order);
+                _repository.Save();
+                return order;
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("Error", ex);
+            }
+
         }
 
         public Tuple<int, IEnumerable<Product>, string > GetAllProduct(bool trackChanges)
@@ -81,6 +144,31 @@ namespace Northwind.Repository
             }
         }
 
-        
+        public Tuple<int, Order, string> Shipped(ShippedDto shippedDto, int orderId)
+        {
+            var order = _repository.Order.GetOrder(orderId, trackChanges: true);
+            //var customer = _repository.Customers.GetCustomer(order.CustomerId, trackChanges: true);
+
+            if (order == null)
+            {
+                Tuple.Create(-1, order, "Not Found" );
+            }
+            else
+            {
+               /* order = new Order();
+                order.ShipAddress = customer.Address;
+                order.ShipCity = customer.City;
+                order.ShipRegion = customer.Region;
+                order.ShipPostalCode = customer.PostalCode;
+                order.ShipCountry = customer.Country;
+                order.ShipVia = shippedDto.ShipVia;
+                order.Freight = shippedDto.Freight;
+                order.ShipName = shippedDto.ShipName;
+                order.ShippedDate = shippedDto.ShipDate;
+                _repository.Order.UpdateOrder(order);
+                _repository.Save();*/
+            }
+            return Tuple.Create(1, order, "success");
+        }
     }
 }
